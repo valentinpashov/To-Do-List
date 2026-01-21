@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException; // 1. Трябва да импортираме грешката
 import java.util.Scanner;
 
 public class ToDoApp {
@@ -14,25 +15,43 @@ public class ToDoApp {
             System.out.println("4. Exit");
             System.out.print("Choice operation's number: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
-            if (choice == 1) {
-                System.out.print("Task: ");
-                String text = scanner.nextLine();
-                tasks.add(new Task(text));
-            } else if (choice == 2) {
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i));
+                if (choice == 1) {
+                    System.out.print("Task: ");
+                    String text = scanner.nextLine();
+                    tasks.add(new Task(text));
+
+                } else if (choice == 2) {
+
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i));
+                    }
+
+                } else if (choice == 3) {
+                    System.out.print("Number: ");
+                    int index = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (index > 0 && index <= tasks.size()) {
+                        tasks.get(index - 1).markAsCompleted();
+                        System.out.println("Done!");
+                    } else {
+                        System.out.println("Invalid number!");
+                    }
+
+                } else if (choice == 4) {
+                    break;
+
+                } else {
+                    System.out.println("Please enter 1-4.");
                 }
-            } else if (choice == 3) {
-                System.out.print("Task's number : ");
-                int index = scanner.nextInt();
-                if (index > 0 && index <= tasks.size()) {
-                    tasks.get(index - 1).markAsCompleted();
-                }
-            } else if (choice == 4) {
-                break;
+
+            } catch (InputMismatchException e) {
+                System.out.println(">>> Error! Please only number! <<<");
+                scanner.nextLine();  // Clean up the memory
             }
         }
     }
