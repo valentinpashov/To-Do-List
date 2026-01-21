@@ -15,7 +15,7 @@ public class ToDoApp {
             System.out.print("Choice operation's number: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Чистим буфера
+            scanner.nextLine();
 
             if (choice == 1) {
                 System.out.print("Task: ");
