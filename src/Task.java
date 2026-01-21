@@ -11,5 +11,8 @@ public class Task {
         this.isCompleted = true;
     }
 
-
+    @Override
+    public String toString() {
+        return description + (isCompleted ? " - [X] " : " - [ ] ");
+    }
 }
